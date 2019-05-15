@@ -14,27 +14,32 @@ public class Warrior extends Character
 		health = (int) (100 + (Math.random() * 100));
 		damage = (int) (1 + (Math.random() * 5));
 	}
-
+	// 
 	public int getHealth()
 	{
 		return health;
 	}
+	//
 	public void setHealth(int health)
 	{
 		this.health = health;
 	}
+	//
 	public int getDamage()
 	{
 		return damage;
 	}
+	//
 	public String getName()
 	{
 		return name;
 	}
+	//
 	public int getLevel()
 	{
 		return level;
 	}
+	//
 	public void setLevel(int level)
 	{
 		this.level = level;

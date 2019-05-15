@@ -16,14 +16,14 @@ public class Launcher {
 		Scanner userInput = new Scanner(System.in);
 		String isQuit;
 		Game game;
-		System.out.println("Instruction: Welcome to the game! During the process of the game,\n"
-				+ "you will be prompted to type you option in under the console.  \nHowever, "
-				+ "you might not know what we are prompting you to type.\nIf you are stuck, "
-				+ "make sure you are spelling everything right! Game Start Now!!\n\n\n");
+		System.out.println("Welcome to the best game ever made! \n"
+				+ "Heres how to play: You will be prompted to type your option under the console.  \nHowever, "
+				+ "you might not know what we are prompting you to type.\nIf you're stuck, "
+				+ "make sure the the spelling is right! Have fun!!\n\n\n");
 		do {
 			//we can polish the game later, maybe make a story class
 			//Part0: Setting name and role
-			System.out.println("????: \"Hey everyone \\(-w-)/ I am a brave Yuh-Ja in the Mills Valley.\nAnd my name is...\"");
+			System.out.println("You: \"Hey everyone \\(-w-)/ I am a brave Yuh-Ja in the Mills Valley.\nAnd my name is...\"");
 			String username = userInput.next();
 			System.out.println(username + ": \"There are many warriors and mages in the valley, and I am a...\"");
 			String role = userInput.next();
@@ -41,7 +41,7 @@ public class Launcher {
 			{
 				userRole = new Mage();
 			}
-			//Part1: Story begin
+			//Part1: Story Start
 			System.out.println(username + ": \"It is almost the time for the Holy Fight, but I felt so weird today.\"");
 			System.out.println("Uncle James: \""+ username + "! HELP ME! That smlime is killin...WHERE DID YOUR PANTS GO?\"\n");
 			System.out.println("1. \"I am coming now uncle James\"");
