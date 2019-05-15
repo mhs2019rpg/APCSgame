@@ -28,7 +28,7 @@ public class KeyManager implements KeyListener {
 			}
 		}
 		
-		attack = keys[KeyEvent.VK_Q];
+		attack = keys[KeyEvent.VK_SPACE];
 		skill = keys[KeyEvent.VK_W];
 
 

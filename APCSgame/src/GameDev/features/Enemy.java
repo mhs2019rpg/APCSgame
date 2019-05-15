@@ -1,22 +1,23 @@
 package GameDev.features;
 
-public class Mage extends Character 
+public class Enemy extends Character
 {
 	private int health;
 	private int damage;
 	private String name;
 	private int level;
 	
-	public Mage()
+	public Enemy(String name, int level)
 	{
+		this.name = name;
 		this.level = level;
 		if(name.endsWith("e"))
 		{
-			health = 200 + 20*(level);
-			damage = 10 + 10*(level);
+			health = (int) (200 + (Math.random()*20*level));
+			damage = (int) (10 + (Math.random()*10*level));
 		}
 	}
-
+	
 	public int getHealth()
 	{
 		return health;
@@ -41,4 +42,5 @@ public class Mage extends Character
 	{
 		this.level = level;
 	}
+
 }

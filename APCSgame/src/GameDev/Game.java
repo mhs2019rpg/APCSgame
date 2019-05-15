@@ -8,6 +8,7 @@ import GameDev.display.Assets;
 import GameDev.display.Display;
 import GameDev.display.ImageLoader;
 import GameDev.features.Character;
+import GameDev.features.Enemy;
 import GameDev.ctrl.KeyManager;
 
 
@@ -16,6 +17,9 @@ public class Game implements Runnable {
 	private Display display;
 	private int width, height;
 	public String title;
+	
+	Character user;
+	Enemy enemy;
 	
 	private boolean running = false;
 	private Thread thread;
@@ -27,11 +31,13 @@ public class Game implements Runnable {
 	//Input
 	private KeyManager keyManager;
 	
-	public Game(Character userRole, int width, int height){
-		this.width = width;
-		this.height = height;
+	public Game(Character userRole, Enemy opponent){
+		this.width = 640;
+		this.height = 480;
 		this.title = "The Werid YuH-Ja";
 		keyManager = new KeyManager();
+		user = userRole;
+		enemy = opponent;
 	}
 	
 	private void init(){
@@ -51,7 +57,7 @@ public class Game implements Runnable {
 	
 	private void tick(){
 		keyManager.tick();
-		
+		//if()
 		//state
 	}
 	private void render(){
@@ -75,10 +81,33 @@ public class Game implements Runnable {
 	public void run(){
 		
 		init();
+		double fps = 60;
+		double timePerTick = 1000000000 / fps;
+		double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
 		
 		while(running){
-			tick();
-			render();
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			timer += now - lastTime;
+			lastTime = now;
+			
+			if(delta >= 1){
+				tick();
+				render();
+				ticks++;
+				delta--;
+			}
+			
+			if(timer >= 1000000000){
+				System.out.println(enemy.getName() + "'s Current HP: " + enemy.getHealth());
+				ticks = 0;
+				timer = 0;
+			}
+
 		}
 		
 		stop();
@@ -115,6 +144,10 @@ public class Game implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	public boolean getRunning()
+	{
+		return running;
 	}
 	
 }
