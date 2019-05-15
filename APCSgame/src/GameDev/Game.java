@@ -2,9 +2,12 @@ package GameDev;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import GameDev.display.Assets;
 import GameDev.display.Display;
+import GameDev.display.ImageLoader;
+import GameDev.features.Character;
 import GameDev.ctrl.KeyManager;
 
 
@@ -19,19 +22,21 @@ public class Game implements Runnable {
 	
 	private BufferStrategy bs;
 	private Graphics g;
+	private BufferedImage bg;
 	
 	//Input
 	private KeyManager keyManager;
 	
-	public Game(String title, int width, int height){
+	public Game(Character userRole, int width, int height){
 		this.width = width;
 		this.height = height;
-		this.title = title;
+		this.title = "The Werid YuH-Ja";
 		keyManager = new KeyManager();
 	}
 	
 	private void init(){
 		display = new Display(title, width, height);
+		bg = ImageLoader.loadImage("/textures/Slime Load.png");
 		display.getFrame().addKeyListener(keyManager);
 
 		Assets.init();
@@ -60,7 +65,7 @@ public class Game implements Runnable {
 		g.clearRect(0, 0, width, height);
 		//Draw Here!
 		
-		g.drawRect(0, 0, width, height);
+		g.drawImage(bg, 0, 0, null);
 		
 		//End Drawing!
 		bs.show();
@@ -71,32 +76,9 @@ public class Game implements Runnable {
 		
 		init();
 		
-		int fps = 60;
-		double timePerTick = 1000000000 / fps;
-		double delta = 0;
-		long now;
-		long lastTime = System.nanoTime();
-		long timer = 0;
-		int ticks = 0;
-		
 		while(running){
-			now = System.nanoTime();
-			delta += (now - lastTime) / timePerTick;
-			timer += now - lastTime;
-			lastTime = now;
-			
-			if(delta >= 1){
-				tick();
-				render();
-				ticks++;
-				delta--;
-			}
-			
-			if(timer >= 1000000000){
-				System.out.println("Ticks and Frames: " + ticks);
-				ticks = 0;
-				timer = 0;
-			}
+			tick();
+			render();
 		}
 		
 		stop();
