@@ -1,5 +1,7 @@
 package GameDev.features;
 
+import GameDev.ctrl.KeyManager;
+
 public class Warrior extends Character 
 {
 	private int health;
@@ -10,7 +12,7 @@ public class Warrior extends Character
 	public Warrior()
 	{
 		health = (int) (100 + (Math.random() * 100));
-		damage = (int) (5 + (Math.random() * 5));
+		damage = (int) (1 + (Math.random() * 5));
 	}
 
 	public int getHealth()

@@ -22,9 +22,9 @@ public class Enemy extends Character
 	{
 		return health;
 	}
-	public void setHealth(int health)
+	public void setHealth(int damage)
 	{
-		this.health = health;
+		health -= damage;
 	}
 	public int getDamage()
 	{
