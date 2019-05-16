@@ -44,4 +44,15 @@ public class Warrior extends Character
 	{
 		this.level = level;
 	}
+	public int getSkill(String spell)
+	{
+		if (spell == "Strong Attack")
+		{
+			return getDamage()*10;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 }

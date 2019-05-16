@@ -6,10 +6,12 @@ public class Mage extends Character
 	private int damage;
 	private String name;
 	private int level;
-	
+	private int intelligence;
+	private int strength;
 	public Mage() {
-			health = 200 + 20*(level);
-			damage = 10 + 10*(level);
+		
+		health = (int) (50 + (Math.random() * 100));
+		damage = (int) (1 + (Math.random() * 1));
 		}
 	//
 	public int getHealth()
@@ -40,5 +42,16 @@ public class Mage extends Character
 	public void setLevel(int level)
 	{
 		this.level = level;
+	}
+	public int getSkill(String spell)
+	{
+		if (spell == "Strong Attack")
+		{
+			return getDamage()*20;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 }

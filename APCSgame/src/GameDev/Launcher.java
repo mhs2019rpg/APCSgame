@@ -10,7 +10,9 @@ import GameDev.features.Mage;
 import GameDev.features.Warrior;
 
 public class Launcher {
-
+// enemies
+// events after a fight
+// enemy
 	public static void main(String[] args) 
 	{
 		Scanner userInput = new Scanner(System.in);
@@ -41,6 +43,8 @@ public class Launcher {
 			{
 				userRole = new Mage();
 			}
+			// sys.outprint("event text")
+			// things
 			//Part1: Story Start
 			System.out.println(username + ": \"It is almost the time for the Holy Fight, but I felt so weird today.\"");
 			System.out.println("Uncle James: \""+ username + "! HELP ME! That smlime is killin...WHERE DID YOUR PANTS GO?\"\n");
