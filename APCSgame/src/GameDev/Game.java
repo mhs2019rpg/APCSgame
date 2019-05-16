@@ -58,14 +58,8 @@ public class Game implements Runnable {
 	private void tick(){
 		if (enemy.getHealth() <= 0)
 		{
+			System.out.println(enemy.getName()+" is defeated!");
 			stop();
-		}
-		
-		keyManager.tick();
-		if(keyManager.attack)
-		{
-			enemy.setHealth(user.getDamage());
-			System.out.println("You made" + user.getDamage()+" damage");
 		}
 		//state
 	}
@@ -113,11 +107,6 @@ public class Game implements Runnable {
 			
 			if(timer >= 1000000000){
 				System.out.println(enemy.getName() + "'s Current HP: " + enemy.getHealth());
-				if(enemy.getHealth() <= 0)
-				{
-					System.out.println(enemy.getName() + " is defeated!");
-					stop();
-				}
 				ticks = 0;
 				timer = 0;
 			}
