@@ -1,23 +1,46 @@
 package GameDev.features;
 
-public abstract class Character 
+public class Character 
 {
-	/*
+	
 	private int health;
 	private int damage;
 	private String name;
 	private int level;
-	*/
 	
-	public abstract int getHealth();
 	
-	public abstract void setHealth(int health);
+	public int getHealth()
+	{
+		return health;
+	}
+	//
+	public void setHealth(int health)
+	{
+		this.health = health;
+	}
+	//
+	public int getDamage()
+	{
+		return damage;
+	}
+	//
+	public String getName()
+	{
+		return name;
+	}
+	//
+	public int getLevel()
+	{
+		return level;
+	}
+	//
+	public void setLevel(int level)
+	{
+		this.level = level;
+	}
+	public void resetVaribles()
+	{
+		
+	}
 	
-	public abstract int getDamage();
-	
-	public abstract String getName();
-	
-	public abstract int getLevel();
-	
-	public abstract void setLevel(int level);
 }

@@ -1,5 +1,8 @@
 package GameDev.features;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Enemy extends Character
 {
 	// event after enemy
@@ -11,9 +14,11 @@ public class Enemy extends Character
 	//enemy repeat
 	private int health;
 	private int damage;
+	// public void battl
 	private String name;
 	private int level;
 	private String [] names = {"slime", "three slimes", "swarm of bats", "giant bat", "bandit", "bear"}; 
+	private ArrayList<Enemy> monsters = new ArrayList<Enemy>();
 	public Enemy(String name, int level)
 	{
 		this.name = name;
@@ -70,5 +75,12 @@ public class Enemy extends Character
 	{
 		this.level = level;
 	}
-
+	public String getEnemy()
+	{
+		return names[(int) Math.random() * 5];
+	}
+	public void enemyDefeated(Character user)
+	{
+		user.resetVariables(getLevel());
+	}
 }

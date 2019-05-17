@@ -23,6 +23,9 @@ public class Launcher {
 				+ "you might not know what we are prompting you to type.\nIf you're stuck, "
 				+ "make sure the the spelling is right! Have fun!!\n\n\n");
 		do {
+			//test
+			Enemy lol = new Enemy("bear",5);
+			System.out.println(lol.getEnemy());
 			//we can polish the game later, maybe make a story class
 			//Part0: Setting name and role
 			System.out.println("You: \"Hey everyone \\(-w-)/ I am a brave Yuh-Ja in the Mills Valley.\nAnd my name is...\"");
@@ -56,10 +59,7 @@ public class Launcher {
 				System.out.println("Slime: \"You are disgusting\"\n" + username + ": \"I AM KILLING YOU.\"\n");
 				Enemy slime = new Enemy("Slime", 1);
 				game = new Game(userRole, slime);
-				do
-				{
-					game.start();
-				} while(game.getRunning());
+				game.start();
 			}
 			System.out.println(username + ": \"Now I should find my pants.\"");
 			System.out.println("\nPlease type \"Quit\" to exit. Type any key to play again.");

@@ -4,46 +4,17 @@ import GameDev.ctrl.KeyManager;
 
 public class Warrior extends Character 
 {
-	private int health;
-	private int damage;
+	
+	private int health = (int) (100 + (Math.random() * 100));
+	private int damage = (int) (5 + (Math.random() * 5));
 	private String name;
 	private int level = 1;
 	
+	// Warrior player = new Warrior(15221, 1251251);
 	public Warrior()
 	{
-		health = (int) (100 + (Math.random() * 100));
-		damage = (int) (1 + (Math.random() * 5));
 	}
 	// 
-	public int getHealth()
-	{
-		return health;
-	}
-	//
-	public void setHealth(int health)
-	{
-		this.health = health;
-	}
-	//
-	public int getDamage()
-	{
-		return damage;
-	}
-	//
-	public String getName()
-	{
-		return name;
-	}
-	//
-	public int getLevel()
-	{
-		return level;
-	}
-	//
-	public void setLevel(int level)
-	{
-		this.level = level;
-	}
 	public int getSkill(String spell)
 	{
 		if (spell == "Strong Attack")
