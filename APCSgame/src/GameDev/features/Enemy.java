@@ -2,6 +2,7 @@ package GameDev.features;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Enemy extends Character
 {
@@ -14,40 +15,42 @@ public class Enemy extends Character
 	//enemy repeat
 	private int health;
 	private int damage;
-	// public void battl
-	private String name;
 	private int level;
-	private String [] names = {"slime", "three slimes", "swarm of bats", "giant bat", "bandit", "bear"}; 
-	private ArrayList<Enemy> monsters = new ArrayList<Enemy>();
+	
+	private String name;
+	private String[] names = {"slime", "three slimes", "swarm of bats", "giant bat", "bandit", "bear"}; 
+	
+	private Random r = new Random(); //Just treat this like a Math.random()
+	
 	public Enemy(String name, int level)
 	{
 		this.name = name;
 		this.level = level;
 		if(name.equalsIgnoreCase("slime"))
 		{
-			health = (int) (100 + (Math.random()*20*level));
-			damage = (int) (10 + (Math.random()*10*level));
+			health = (int) (100 + (r.nextInt(21)*level));
+			damage = (int) (10 + (r.nextInt(11)*level));
 		}
 		if(name.equalsIgnoreCase("three slimes"))
 		{
-			health = (int) (200 + (Math.random()*20*level));
-			damage = (int) (10 + (Math.random()*10*level));
+			health = (int) (200 + (r.nextInt(21)*level));
+			damage = (int) (10 + (r.nextInt(11)*level));
 		}if(name.equalsIgnoreCase("swarm of bats"))
 		{
-			health = (int) (200 + (Math.random()*20*level));
-			damage = (int) (10 + (Math.random()*10*level));
+			health = (int) (200 + (r.nextInt(21)*level));
+			damage = (int) (10 + (r.nextInt(11)*level));
 		}if(name.equalsIgnoreCase("giant bat"))
 		{
-			health = (int) (200 + (Math.random()*20*level));
-			damage = (int) (10 + (Math.random()*10*level));
+			health = (int) (200 + (r.nextInt(21)*level));
+			damage = (int) (10 + (r.nextInt(11)*level));
 		}if(name.equalsIgnoreCase("bandit"))
 		{
-			health = (int) (200 + (Math.random()*20*level));
-			damage = (int) (10 + (Math.random()*10*level));
+			health = (int) (200 + (r.nextInt(21)*level));
+			damage = (int) (10 + (r.nextInt(11)*level));
 		}if(name.equalsIgnoreCase("bear"))
 		{
-			health = (int) (200 + (Math.random()*20*level));
-			damage = (int) (10 + (Math.random()*10*level));
+			health = (int) (200 + (r.nextInt(21)*level));
+			damage = (int) (10 + (r.nextInt(11)*level));
 		}
 	}
 	
@@ -77,10 +80,16 @@ public class Enemy extends Character
 	}
 	public String getEnemy()
 	{
-		return names[(int) Math.random() * 5];
+		return names[r.nextInt(7)];
 	}
-	public void enemyDefeated(Character user)
-	{
-		user.resetVariables(getLevel());
+
+	@Override
+	public String getSpell() {
+		return null;
+	}
+
+	@Override
+	public int getSkillDMG() {
+		return 0;
 	}
 }

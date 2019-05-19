@@ -24,8 +24,7 @@ public class Launcher {
 				+ "make sure the the spelling is right! Have fun!!\n\n\n");
 		do {
 			//test
-			Enemy lol = new Enemy("bear",5);
-			System.out.println(lol.getEnemy());
+
 			//we can polish the game later, maybe make a story class
 			//Part0: Setting name and role
 			System.out.println("You: \"Hey everyone \\(-w-)/ I am a brave Yuh-Ja in the Mills Valley.\nAnd my name is...\"");
@@ -37,32 +36,44 @@ public class Launcher {
 				System.out.println("No way you are a "+ role + ". You must be either a warrior or a mage. Try Again!");
 				role = userInput.next();
 			}
-			Character userRole;
+			Character user;
 			if(role.equalsIgnoreCase("warrior"))
 			{
-				userRole = new Warrior();
+				user = new Warrior();
 			}
 			else
 			{
-				userRole = new Mage();
+				user = new Mage();
 			}
-			// sys.outprint("event text")
-			// things
+			//More
+			System.out.println(username + ": \"Here is my file. Should I take a look?\"");
+			System.out.println("1. Yes. I want to review my information");
+			System.out.println("2. No let's go out and get some fresh air");
+			if(userInput.next().equals("1"))
+			{
+				System.out.println("============================Profile Opened==============================\n");
+				System.out.println("Class: " + user.getName());
+				System.out.println("Lv: " + user.getLevel());
+				System.out.println("HP: " + user.getHealth());
+				System.out.println("Attack DMG: " + user.getDamage());
+				System.out.println("Skill Spell: " + user.getSpell());
+				System.out.println("Skill DMG: " + user.getSkillDMG());
+				System.out.println("\n============================Profile Closed==============================\n");
+			}
 			//Part1: Story Start
 			System.out.println(username + ": \"It is almost the time for the Holy Fight, but I felt so weird today.\"");
 			System.out.println("Uncle James: \""+ username + "! HELP ME! That smlime is killin...WHERE DID YOUR PANTS GO?\"\n");
 			System.out.println("1. \"I am coming now uncle James\"");
 			System.out.println("2. \"????Where's my pants?!\"");
 			String choice = userInput.next();
-			if(choice.equals("1"))
-			{
-				System.out.println("Slime: \"You are disgusting\"\n" + username + ": \"I AM KILLING YOU.\"\n");
-				Enemy slime = new Enemy("Slime", 1);
-				game = new Game(userRole, slime);
-				game.start();
-			}
-			System.out.println(username + ": \"Now I should find my pants.\"");
-			System.out.println("\nPlease type \"Quit\" to exit. Type any key to play again.");
+			System.out.println("Slime: \"You are disgusting\"");
+			System.out.println(username + ": \"I am going to KILL YOU first, and I find my pants\"\n");
+			Enemy slime = new Enemy("Slime", 1);
+			game = new Game(user, slime);
+			game.startEvent(userInput);
+		
+			System.out.println(username + " has ended the endless jurnay of finding the pants...\n");
+			System.out.println("\nPlease type \"Quit\" to exit. Type any key to start a new game.");
 			isQuit = userInput.next();
 		} while (!isQuit.equalsIgnoreCase("quit"));
 			userInput.close();
