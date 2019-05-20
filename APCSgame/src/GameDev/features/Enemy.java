@@ -34,13 +34,13 @@ public class Enemy extends Character
 		}
 		else if(name.equalsIgnoreCase("three slimes"))
 		{
-			health = 200 + r.nextInt(21)*level;
-			damage = 10 + r.nextInt(11)*level;
+			health = 150 + r.nextInt(21)*level;
+			damage = 12 + r.nextInt(11)*level;
 		}
 		else if(name.equalsIgnoreCase("swarm of bats"))
 		{
-			health = 200 + r.nextInt(21)*level;
-			damage = 10 + r.nextInt(11)*level;
+			health = 80 + r.nextInt(21)*level;
+			damage = 11 + r.nextInt(11)*level;
 		}
 		else if(name.equalsIgnoreCase("giant bat"))
 		{
@@ -54,8 +54,8 @@ public class Enemy extends Character
 		}
 		else if(name.equalsIgnoreCase("bear"))
 		{
-			health = 200 + r.nextInt(21)*level;
-			damage = 10 + r.nextInt(11)*level;
+			health = 250 + r.nextInt(21)*level;
+			damage = 25 + r.nextInt(11)*level;
 		}
 	}
 	
@@ -286,7 +286,7 @@ public class Enemy extends Character
 		{
 			System.out.println("1. \"I suppose you want to fight\"");
 			System.out.println("2. \"What are you saying?\"");
-			System.out.println("3. \"In the Avenger 10, the Ironman...\"");
+			System.out.println("3. \"In the Avengers 4.....\"");
 			choice = userInput.nextLine();
 			if (choice.equals("1"))
 			{

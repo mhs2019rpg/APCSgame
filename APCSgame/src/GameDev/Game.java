@@ -11,9 +11,8 @@ public class Game {
 	
 	private Character user;
 	private Enemy enemy;
-	private int enemyHP,userHP,enemyDMG,userDMG;
+	private int enemyHP, userHP, enemyDMG, userDMG;
 	private String enemyName;
-	
 	private boolean running = false;
 	private Random r = new Random();
 	
@@ -28,11 +27,11 @@ public class Game {
 		enemyDMG = enemy.getDamage();
 	}
 	
-	//take turn battle. if health reach 0, running = false and battle end
+	//the turn battle. if the health reach 0, running = false and the battle "end"
 		public void battle(Scanner userInput)
 		{
 			running = true;
-			System.out.println("==============================Battle Begin==============================\n");
+			System.out.println("==============================Battle start!=============================\n");
 			do 
 			{
 				userTurn(userInput);
@@ -42,12 +41,15 @@ public class Game {
 				}
 			} while(running);
 		}
-	//Prompt player for attack and skill, print out all action the player made, go to next stage if enemy is defeated
+	//Prompt player for an attack or skill,
+	//returns actions the player made
+	//progreses to next stage if enemy is defeated
 	public void userTurn(Scanner userInput)
 	{
 		System.out.println("----------Your Turn!----------\n");
-		System.out.println("Lv." + enemy.getLevel() + " " + enemyName + "\nHP:          "
-		+ enemy.getHealth() + "/" + enemyHP + "\nDMG:         " + enemyDMG + "\n");
+		System.out.println("Lv." + enemy.getLevel() + " " + enemyName + 
+		"\nHP: " + enemy.getHealth() + "/" + enemyHP +
+		"\nDMG:" + enemyDMG + "\n");
 		String attackOption = "1. Attack:                                             ".substring(0, 36) + user.getDamage() + " dmg";
 		String skillOption = ("2. " + user.getSpell() +":                              ").substring(0, 36) + user.getSkillDMG() + " dmg\n";
 		System.out.println("Lv." + user.getLevel() + " " +user.getName());
@@ -59,7 +61,7 @@ public class Game {
 		{
 			System.out.println(cmd);
 			enemy.setHealth(userDMG);
-			System.out.println("\nYou used \"ATTACK\" and dealed with " + userDMG + " dmg");
+			System.out.println("\nYou attacked with " + userDMG + " dmg");
 			isEnemyDefeated(userInput);
 		}
 		else if(cmd.equalsIgnoreCase(user.getSpell()))
@@ -138,56 +140,43 @@ public class Game {
 		System.out.println("==============================Battle End================================\n");
 		user.updateVariables(enemy.getLevel() + 1);
 		System.out.println("Hey you defeated "+ enemy.getName()+"! But it did not have your pants...");
-		System.out.println("1. I want to battle monster in the next level");
-		System.out.println("2. I want to challenge monster in a much higher level");
-		System.out.println("3. I want to quit");
+		System.out.println("1. I want to battle the next monster for the next level");
+		System.out.println("2. I want to fight a monster that will probably murder me horribly");
+		System.out.println("3. I want to quit because I'm bored and this game obviously sucks");
 		String cmd;
 		Enemy nextEnemy;
 		Game newGame;
-		do
-		{
+		do {
 			cmd = userInput.nextLine();
-			if (cmd.equals("1")||cmd.equals("2"))
-			{
+			if (cmd.equals("1")||cmd.equals("2")) {
 				int level = user.getLevel() + 1;
-				if(cmd.equals("2"))
-				{
+				if(cmd.equals("2")) {
 					level += 1 + r.nextInt(5);
 				}
 				nextEnemy = new Enemy(enemy.getEnemy(), level);
 				newGame = new Game(user,nextEnemy);
 				newGame.startEvent(userInput);
 			}
-			else if (cmd.equals("3"))
-			{
+			else if (cmd.equals("3")) {
 				break;
 			}
 		}
 		while(!(cmd.equals("1")||cmd.equals("2")||cmd.equals("3")));
-		
 	}
 	//if enemy is dead, print different text and go to next stage
-	public void isEnemyDefeated(Scanner userInput) 
-	{
-		if(enemy.getHealth() <= 0)
-		{
+	public void isEnemyDefeated(Scanner userInput) {
+		if(enemy.getHealth() <= 0) {
 			System.out.println(enemyName + "'s current HP is 0/" + enemyHP + "\n");
 			enemyDefeated(userInput);
-		}
-		else
-		{
+			} else {
 			System.out.println(enemyName + "'s current HP is " + enemy.getHealth() + "/" + enemyHP + "\n");
 		}
 	}
 	//Start event, and battle if battle are triggered, else just start another game
-	public void startEvent(Scanner userInput)
-	{
-		if (enemy.triggerBattle(user, userInput))
-		{
+	public void startEvent(Scanner userInput) {
+		if (enemy.triggerBattle(user, userInput)) {
 			battle(userInput);
-		}
-		else
-		{
+		} else {
 			Game newGame = new Game(user, enemy);
 			newGame.startEvent(userInput);
 		}

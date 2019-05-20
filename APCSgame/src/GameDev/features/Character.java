@@ -16,50 +16,41 @@ public abstract class Character
 		
 	}
 	
-	public int getHealth()
-	{
+	public int getHealth() {
 		return HP;
 	}
 	//
-	public int getDefaultHP()
-	{
+	public int getDefaultHP() {
 		return defaultHP;
 	}
 	//
-	public void setHealth(int dmg)
-	{
+	public void setHealth(int dmg) {
 		HP -= dmg;
 	}
 	//
-	public int getDamage()
-	{
+	public int getDamage() {
 		return damage;
 	}
-	public void setDamage(int dmg)
-	{
+	public void setDamage(int dmg) {
 		damage = dmg;
 	}
 	//
-	public int getLevel()
-	{
+	public int getLevel() {
 		return level;
 	}
 	//
-	public void setLevel(int level)
-	{
+	public void setLevel(int level) {
 		this.level = level;
 	}
 	public void updateVariables(int level) 
 	{
 
 	}
-	public String getName()
-	{
+	public String getName() {
 		return className;
 	}
 
-	public String getSpell() 
-	{
+	public String getSpell() {
 		return spell;
 	}
 	public abstract int getSkillDMG();

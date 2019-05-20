@@ -27,14 +27,13 @@ public class Launcher {
 
 			//we can polish the game later, maybe make a story class
 			//Part0: Setting name and role
-			System.out.println("You: \"Hey everyone \\(-w-)/ I am a brave Yuh-Ja in the Mills Valley.\nAnd my name is...\"");
+			System.out.println("You: \"Hey everyone \\(-w-)/ I am a mere peasant in the Mills Valley.\nAnd my name is...\"");
 			String username = userInput.nextLine();
 			System.out.println(username + ": \"There are many warriors and mages in the valley, and I am a...\"");
 			String role = userInput.nextLine();
 			int level = 1;
-			while(!(role.equalsIgnoreCase("warrior")||role.equalsIgnoreCase("mage")||role.equals("admin")))
-			{
-				System.out.println("No way you are a "+ role + ". You must be either a warrior or a mage. Try Again!");
+			while(!(role.equalsIgnoreCase("warrior")||role.equalsIgnoreCase("mage")||role.equals("admin"))) {
+				System.out.println("Nope, you can't be a "+ role + ". You have to be either a warrior or a mage. Try Again!");
 				role = userInput.nextLine();
 			}
 			Character user;

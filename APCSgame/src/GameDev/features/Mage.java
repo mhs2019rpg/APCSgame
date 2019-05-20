@@ -22,7 +22,7 @@ public class Mage extends Character
 		
 		HP = 50 + r.nextInt(101);
 		damage = 1 + r.nextInt(3);
-		spell = "Ryuu ga wa ga teki wo kurau"; 
+		spell = "omae wa mou shindeiru"; 
 		level = 1;
 	}
 	//return HP
