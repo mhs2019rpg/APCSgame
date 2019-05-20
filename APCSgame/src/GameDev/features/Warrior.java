@@ -2,12 +2,11 @@ package GameDev.features;
 
 import java.util.Random;
 
-import GameDev.ctrl.KeyManager;
-
 public class Warrior extends Character 
 {
 	
-	private int health;
+	private int HP;
+	private int defaultHP;
 	private int damage;
 	private String spell;
 	private int level;
@@ -16,7 +15,7 @@ public class Warrior extends Character
 	
 	public Warrior()
 	{
-		health = 100 + r.nextInt(51);
+		HP = 100 + r.nextInt(51);
 		damage = 5 + r.nextInt(6);
 		spell = "Ryujin no ken wo kurae";
 		level = 1;
@@ -24,17 +23,27 @@ public class Warrior extends Character
 	//return HP
 	public int getHealth()
 	{
-		return health;
+		return HP;
+	}
+	//return the hp when the player was setup
+	public int getDefaultHP()
+	{
+		return defaultHP;
 	}
 	//take dmg and subtract it from health
 	public void setHealth(int dmg)
 	{
-		health -= dmg;
+		HP -= dmg;
 	}
 	//return damage
 	public int getDamage()
 	{
 		return damage;
+	}
+	//return damage
+	public void setDamage(int dmg)
+	{
+		damage = dmg;
 	}
 	//return level
 	public int getLevel()
@@ -44,17 +53,19 @@ public class Warrior extends Character
 	//multiply variables by difference in target level and current level
 	public void updateVariables(int level) 
 	{
-		int diffInLv = level - this.level;
-		this.level = level;
-		health += r.nextInt(51)*diffInLv;
-		damage += r.nextInt(6)*diffInLv;
+		if(this.level < level)
+		{
+			int diffInLv = level - this.level;
+			this.level = level;
+			HP += r.nextInt(51)*diffInLv;
+			damage += r.nextInt(6)*diffInLv;
+		}
 	}
 	//return the damage of the skill
 	public int getSkillDMG()
 	{
 			return getDamage()*10;
 	}
-	@Override
 	public String getSpell() 
 	{
 		return spell;

@@ -1,23 +1,13 @@
 package GameDev;
 
-import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
+import java.util.Random;
 import java.util.Scanner;
 
-import GameDev.display.Assets;
-import GameDev.display.Display;
-import GameDev.display.ImageLoader;
 import GameDev.features.Character;
 import GameDev.features.Enemy;
-import GameDev.ctrl.KeyManager;
 
 
-public class Game implements Runnable {
-
-	private Display display;
-	private int width, height;
-	public String title;
+public class Game {
 	
 	private Character user;
 	private Enemy enemy;
@@ -25,20 +15,9 @@ public class Game implements Runnable {
 	private String enemyName;
 	
 	private boolean running = false;
-	private Thread thread;
-	
-	private BufferStrategy bs;
-	private Graphics g;
-	private BufferedImage bg;
-	
-	//Input
-	private KeyManager keyManager;
+	private Random r = new Random();
 	
 	public Game(Character userRole, Enemy opponent){
-		this.width = 640;
-		this.height = 480;
-		this.title = "The Werid YuH-Ja";
-		keyManager = new KeyManager();
 		user = userRole;
 		userHP = user.getHealth();
 		userDMG = user.getDamage();
@@ -49,123 +28,19 @@ public class Game implements Runnable {
 		enemyDMG = enemy.getDamage();
 	}
 	
-	//No need to worry now
-	private void init(){
-		display = new Display(title, width, height);
-		bg = ImageLoader.loadImage("/textures/MinSlime.png");
-		display.getFrame().addKeyListener(keyManager);
-
-		Assets.init();
-		
-		/*handler = new Handler(this);
-		gameCamera = new GameCamera(handler, 0, 0);
-		
-		gameState = new GameState(handler);
-		menuState = new MenuState(handler);
-		State.setState(menuState); */
-	}
-	//No need to worry now
-	private void tick(){
-		if (enemy.getHealth() <= 0)
-		{
-			//System.out.println(enemy.getName()+" is defeated!");
-			stop();
-		}
-		//state
-	}
-	//No need to worry now
-	private void render(){
-		bs = display.getCanvas().getBufferStrategy();
-		if(bs == null){
-			display.getCanvas().createBufferStrategy(3);
-			return;
-		}
-		g = bs.getDrawGraphics();
-		//Clear Screen
-		g.clearRect(0, 0, width, height);
-		//Draw Here!
-		
-		g.drawImage(bg, 0, 0, null);
-		
-		//End Drawing!
-		bs.show();
-		g.dispose();
-	}
-	//No need to worry now
-	public void run(){
-		
-		init();
-		double fps = 60;
-		double timePerTick = 1000000000 / fps;
-		double delta = 0;
-		long now;
-		long lastTime = System.nanoTime();
-		long timer = 0;
-		int ticks = 0;
-		
-		while(running){
-			now = System.nanoTime();
-			delta += (now - lastTime) / timePerTick;
-			timer += now - lastTime;
-			lastTime = now;
-			
-			if(delta >= 1){
-				tick();
-				render();
-				ticks++;
-				delta--;
-			}
-			
-			if(timer >= 1000000000){
-				System.out.println(enemy.getName() + "'s Current HP: " + enemy.getHealth());
-				ticks = 0;
-				timer = 0;
-			}
-		}
-		
-		stop();
-		
-	}
-	//No need to worry now
-	public KeyManager getKeyManager(){
-		return keyManager;
-	}
-	//No need to worry now
-	public int getWidth(){
-		return width;
-	}
-	//No need to worry now
-	public int getHeight(){
-		return height;
-	}
-	//No need to worry now
-	public synchronized void start(){
-		if(running)
-			return;
-		running = true;
-		thread = new Thread(this);
-		thread.start();
-	}
-	//No need to worry now
-	public synchronized void stop(){
-		if(!running)
-			return;
-		running = false;
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	//take turn battle. if health reach 0, game end
+	//take turn battle. if health reach 0, running = false and battle end
 		public void battle(Scanner userInput)
 		{
+			running = true;
 			System.out.println("==============================Battle Begin==============================\n");
 			do 
 			{
 				userTurn(userInput);
-				enemyTurn(userInput);
-			} while(enemy.getHealth() > 0||user.getHealth() > 0);
+				if(running)
+				{
+					enemyTurn(userInput);
+				}
+			} while(running);
 		}
 	//Prompt player for attack and skill, print out all action the player made, go to next stage if enemy is defeated
 	public void userTurn(Scanner userInput)
@@ -173,12 +48,16 @@ public class Game implements Runnable {
 		System.out.println("----------Your Turn!----------\n");
 		System.out.println("Lv." + enemy.getLevel() + " " + enemyName + "\nHP:          "
 		+ enemy.getHealth() + "/" + enemyHP + "\nDMG:         " + enemyDMG + "\n");
-		System.out.println("1. Attack: " + userDMG + " dmg");
-		System.out.println("2. " + user.getSpell() +": "+user.getSkillDMG()+" dmg\n");
-		String cmd = userInput.next();
+		String attackOption = "1. Attack:                                             ".substring(0, 36) + user.getDamage() + " dmg";
+		String skillOption = ("2. " + user.getSpell() +":                              ").substring(0, 36) + user.getSkillDMG() + " dmg\n";
+		System.out.println("Lv." + user.getLevel() + " " +user.getName());
+		System.out.println(attackOption);
+		System.out.println(skillOption);
+		String cmd = userInput.nextLine();
 		
 		if(cmd.equalsIgnoreCase("attack"))
 		{
+			System.out.println(cmd);
 			enemy.setHealth(userDMG);
 			System.out.println("\nYou used \"ATTACK\" and dealed with " + userDMG + " dmg");
 			isEnemyDefeated(userInput);
@@ -186,12 +65,13 @@ public class Game implements Runnable {
 		else if(cmd.equalsIgnoreCase(user.getSpell()))
 		{
 			enemy.setHealth(user.getSkillDMG());
-			System.out.println("\nYou used \""+user.getSpell()+"\" and made " + user.getSkillDMG() + " dmg to" + enemyName);
+			System.out.println("\nYou used \""+user.getSpell()+"\" and made " + user.getSkillDMG() + " dmg to " + enemyName);
 			isEnemyDefeated(userInput);
 		}
 		else
 		{
-			System.out.println("\nOops looks like you just miss your turn...\n");
+			System.out.println("\nOops looks like you just miss your turn...");
+			System.out.println("Make sure you spell the option correctly\n");
 		}
 	}
 	//print out all action the enemy made, trigger playerDefeated option if player is dead
@@ -213,6 +93,7 @@ public class Game implements Runnable {
 
 	public void userDefeated(Scanner userInput) 
 	{
+		running = false;
 		System.out.println("==============================Battle End================================\n");
 		System.out.println("Unfortunely you are dead! Here are you options:");
 		System.out.println("1. I would like to battle monster in my level");
@@ -224,7 +105,7 @@ public class Game implements Runnable {
 		Game newGame;
 		do
 		{
-			cmd = userInput.next();
+			cmd = userInput.nextLine();
 			if (cmd.equals("1")||cmd.equals("2")||cmd.equals("3"))
 			{
 				int level = user.getLevel();
@@ -236,20 +117,53 @@ public class Game implements Runnable {
 				{
 					level++;
 				}
+				user.updateVariables(user.getLevel());
 				nextEnemy = new Enemy(enemy.getEnemy(), level);
 				newGame = new Game(user,nextEnemy);
-				//newGame.startEvent
-				newGame.battle(userInput);
+				newGame.startEvent(userInput);
+			}
+			else if (cmd.equals("4"))
+			{
+				break;
 			}
 		}
 		while(!(cmd.equals("1")||cmd.equals("2")||cmd.equals("3")||cmd.equals("4")));
 		
 		
 	}
-	
+	//start new game when enemy is defeated
 	public void enemyDefeated(Scanner userInput) 
 	{
+		running = false;
 		System.out.println("==============================Battle End================================\n");
+		user.updateVariables(enemy.getLevel() + 1);
+		System.out.println("Hey you defeated "+ enemy.getName()+"! But it did not have your pants...");
+		System.out.println("1. I want to battle monster in the next level");
+		System.out.println("2. I want to challenge monster in a much higher level");
+		System.out.println("3. I want to quit");
+		String cmd;
+		Enemy nextEnemy;
+		Game newGame;
+		do
+		{
+			cmd = userInput.nextLine();
+			if (cmd.equals("1")||cmd.equals("2"))
+			{
+				int level = user.getLevel() + 1;
+				if(cmd.equals("2"))
+				{
+					level += 1 + r.nextInt(5);
+				}
+				nextEnemy = new Enemy(enemy.getEnemy(), level);
+				newGame = new Game(user,nextEnemy);
+				newGame.startEvent(userInput);
+			}
+			else if (cmd.equals("3"))
+			{
+				break;
+			}
+		}
+		while(!(cmd.equals("1")||cmd.equals("2")||cmd.equals("3")));
 		
 	}
 	//if enemy is dead, print different text and go to next stage
@@ -265,10 +179,18 @@ public class Game implements Runnable {
 			System.out.println(enemyName + "'s current HP is " + enemy.getHealth() + "/" + enemyHP + "\n");
 		}
 	}
-	//
+	//Start event, and battle if battle are triggered, else just start another game
 	public void startEvent(Scanner userInput)
 	{
-		battle(userInput);
+		if (enemy.triggerBattle(user, userInput))
+		{
+			battle(userInput);
+		}
+		else
+		{
+			Game newGame = new Game(user, enemy);
+			newGame.startEvent(userInput);
+		}
 	}
 }
 

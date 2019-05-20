@@ -3,11 +3,13 @@ package GameDev.features;
 public abstract class Character 
 {
 
-	private int health;
+	private int HP;
+	private int defaultHP;
 	private int damage;
 	private String skillName;
 	private int level;
 	private String className;
+	private String spell;
 	
 	public Character()
 	{
@@ -16,17 +18,26 @@ public abstract class Character
 	
 	public int getHealth()
 	{
-		return health;
+		return HP;
+	}
+	//
+	public int getDefaultHP()
+	{
+		return defaultHP;
 	}
 	//
 	public void setHealth(int dmg)
 	{
-		health -= dmg;
+		HP -= dmg;
 	}
 	//
 	public int getDamage()
 	{
 		return damage;
+	}
+	public void setDamage(int dmg)
+	{
+		damage = dmg;
 	}
 	//
 	public int getLevel()
@@ -38,13 +49,18 @@ public abstract class Character
 	{
 		this.level = level;
 	}
-	public void resetVariables(int level2) {
-		// TODO Auto-generated method stub
+	public void updateVariables(int level) 
+	{
+
 	}
 	public String getName()
 	{
 		return className;
 	}
-	public abstract String getSpell();
+
+	public String getSpell() 
+	{
+		return spell;
+	}
 	public abstract int getSkillDMG();
 }

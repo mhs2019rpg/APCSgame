@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class Mage extends Character 
 {
-	private int health;
+	private int HP;
+	private int defaultHP;
 	private int damage;
 	private String spell; 
 	private int level;
@@ -12,13 +13,14 @@ public class Mage extends Character
 	private Random r = new Random();
 	
 	private String className = "Mage";
+	
 	//private int intelligence;
 	//private int strength;
 	
 	public Mage() 
 	{
 		
-		health = 50 + r.nextInt(101);
+		HP = 50 + r.nextInt(101);
 		damage = 1 + r.nextInt(3);
 		spell = "Ryuu ga wa ga teki wo kurau"; 
 		level = 1;
@@ -26,17 +28,26 @@ public class Mage extends Character
 	//return HP
 	public int getHealth()
 	{
-		return health;
+		return HP;
+	}
+	//return the hp when the player was setup
+	public int getDefaultHP()
+	{
+		return defaultHP;
 	}
 	//take dmg and subtract it from health
 	public void setHealth(int dmg)
 	{
-		health -= dmg;
+		HP -= dmg;
 	}
 	//return damage
 	public int getDamage()
 	{
 		return damage;
+	}
+	public void setDamage(int dmg)
+	{
+		damage = dmg;
 	}
 	//return level
 	public int getLevel()
@@ -46,10 +57,13 @@ public class Mage extends Character
 	//multiply variables by difference in target level and current level
 	public void updateVariables(int level) 
 	{
-		int diffInLv = level - this.level;
-		this.level = level;
-		health += r.nextInt(11)*diffInLv;
-		damage += r.nextInt(3)*diffInLv;
+		if(this.level < level)
+		{
+			int diffInLv = level - this.level;
+			this.level = level;
+			HP += r.nextInt(11)*diffInLv;
+			damage += r.nextInt(3)*diffInLv;
+		}
 	}
 	public int getSkillDMG()
 	{
