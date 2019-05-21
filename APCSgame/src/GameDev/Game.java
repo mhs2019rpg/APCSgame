@@ -6,7 +6,7 @@ import java.util.Scanner;
 import GameDev.features.Character;
 import GameDev.features.Enemy;
 
-
+//test
 public class Game {
 	
 	private Character user;
