@@ -336,11 +336,14 @@ public class Enemy extends Character
 		String choice;
 		do
 		{
-			System.out.println("1. \"fight\"");
+			System.out.println("1. \"fight the orange\"");
 			System.out.println("2. \"offer big trade deal\"");
 			System.out.println("3. \"covfefe.....\"");
 			choice = userInput.nextLine();
 			if (choice.equals("1"))
+			{
+				
+			}
 	}
 }
 
