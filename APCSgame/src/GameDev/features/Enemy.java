@@ -328,5 +328,19 @@ public class Enemy extends Character
 		}
 		while(!(choice.equals("1")||choice.equals("2")||choice.equals("3")));
 	}
+	private boolean orangeMan(Character user, Scanner userInput) {
+		System.out.println("As you step through the forest you hear a bigly and very strong voice behind the nearby trees");
+		System.out.println("Orange Man: We need to build a wall and it has to built quickly and I don't mind having \n"
+						+ "a big beutiful door in that wall so people can come in legally");
+		System.out.println("They drugs");
+		String choice;
+		do
+		{
+			System.out.println("1. \"fight\"");
+			System.out.println("2. \"offer big trade deal\"");
+			System.out.println("3. \"covfefe.....\"");
+			choice = userInput.nextLine();
+			if (choice.equals("1"))
+	}
 }
 
