@@ -29,7 +29,7 @@ public class Launcher {
 			//Part0: Setting name and role
 			System.out.println("You: \"Hey everyone \\(-w-)/ I am a mere peasant in the Mills Valley.\nAnd my name is...\"");
 			String username = userInput.nextLine();
-			System.out.println(username + ": \"There are many warriors and mages in the valley, and I am a...\"");
+			System.out.println(username + ": \"There are many warriors and mages in this land, and I am a...\"");
 			String role = userInput.nextLine();
 			int level = 1;
 			while(!(role.equalsIgnoreCase("warrior")||role.equalsIgnoreCase("mage")||role.equals("admin"))) {
@@ -42,7 +42,7 @@ public class Launcher {
 				user = new Warrior();
 			}
 			//For me to test out stuff
-			else if(role.equals("admin"))
+			else if(role.equals("debug"))
 			{
 				user = new Warrior();
 				System.out.println("\n1. Set user to Lv.99");
@@ -78,14 +78,15 @@ public class Launcher {
 				System.out.println("\n============================Profile Closed==============================\n");
 			}
 			//Part1: Story Start
-			System.out.println(username + ": \"It is almost the time for the Holy Fight, but I felt so weird today.\"");
-			System.out.println("Uncle James: \""+ username + "! HELP ME! That smlime is killin...WHERE DID YOUR PANTS GO?\"\n");
+			System.out.println(username + ": \"Its time for an adventure, but where do I start?\"");
+			System.out.println("(A mysterious figure suddenly barges into your room and steals your pet goldfish)");
+			System.out.println("Uncle James: \"little "+ username + "! HELP ME! That smlime is killin...WHERE DID YOUR PANTS GO?\"\n");
 			
 			Enemy slime = new Enemy("Slime", level);
 			game = new Game(user, slime);
 			game.startEvent(userInput);
 		
-			System.out.println(username + " has ended the endless jurnay of finding the pants...\n");
+			System.out.println(username + " has finally found his pet goldfish unharmed... but who stole his pet?\n");
 			System.out.println("\nPlease type \"Quit\" to exit. Type any key to start a new game.");
 			isQuit = userInput.nextLine();
 		} while (!isQuit.equalsIgnoreCase("quit"));
