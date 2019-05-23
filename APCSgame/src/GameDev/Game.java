@@ -72,8 +72,9 @@ public class Game {
 		}
 		else
 		{
-			System.out.println("\nOops looks like you just miss your turn...");
-			System.out.println("Make sure you spell the option correctly\n");
+			System.out.println("\nOops Sadly you missed your attack...");
+			System.out.println("Make sure you spell the option correctly");
+			System.out.println("After all, spelling is important!\n");
 		}
 	}
 	//print out all action the enemy made, trigger playerDefeated option if player is dead
@@ -102,6 +103,7 @@ public class Game {
 		System.out.println("2. I would like to train with monster in lower level");
 		System.out.println("3. I would like to challenge monster in higher level");
 		System.out.println("4. I want to quit");
+		user.setHealth(userHP);
 		String cmd;
 		Enemy nextEnemy;
 		Game newGame;

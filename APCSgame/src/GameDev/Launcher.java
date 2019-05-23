@@ -21,7 +21,7 @@ public class Launcher {
 		System.out.println("Welcome to the best game ever made! \n"
 				+ "Heres how to play: You will be prompted to type your option under the console.  \nHowever, "
 				+ "you might not know what we are prompting you to type.\nIf you're stuck, "
-				+ "make sure the the spelling is right! Have fun!!\n\n\n");
+				+ "make sure the the spelling is right! No seriously make sure its right. Have fun!!\n\n\n");
 		do {
 			//test
 
@@ -42,7 +42,7 @@ public class Launcher {
 				user = new Warrior();
 			}
 			//For me to test out stuff
-			else if(role.equals("debug"))
+			else if(role.equals("admin"))
 			{
 				user = new Warrior();
 				System.out.println("\n1. Set user to Lv.99");
@@ -80,7 +80,7 @@ public class Launcher {
 			//Part1: Story Start
 			System.out.println(username + ": \"Its time for an adventure, but where do I start?\"");
 			System.out.println("(A mysterious figure suddenly barges into your room and steals your pet goldfish)");
-			System.out.println("Uncle James: \"little "+ username + "! HELP ME! That smlime is killin...WHERE DID YOUR PANTS GO?\"\n");
+			System.out.println("Uncle James: \"little "+ username + "! HELP ME! That smlime is killin...WHERE DID YOUR GOLDFISH GO?\"\n");
 			
 			Enemy slime = new Enemy("Slime", level);
 			game = new Game(user, slime);

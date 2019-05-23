@@ -17,7 +17,7 @@ public class Warrior extends Character
 	{
 		HP = 100 + r.nextInt(51);
 		damage = 5 + r.nextInt(6);
-		spell = "Ryujin no ken wo kurae";
+		spell = "Heavy Attack";
 		level = 1;
 	}
 	//return HP

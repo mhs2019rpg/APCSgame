@@ -19,7 +19,8 @@ public class Enemy extends Character
 	private int level;
 	
 	private String name;
-	private String[] names = {"slime", "three slimes", "swarm of bats", "giant bat", "bandit", "bear"}; 
+	private String[] names = {"slime", "three slimes", "swarm of bats", "giant bat", "bandit", "bear", "trump", "spaghetti cult", "commy",
+							  "skelly", "poke", "gryphon", "button"}; 
 	
 	private Random r = new Random(); //Just treat this like a Math.random()
 	
@@ -30,7 +31,7 @@ public class Enemy extends Character
 		if(name.equalsIgnoreCase("slime"))
 		{
 			health = 100 + 3* level + r.nextInt(21)*level;
-			damage = 10 + r.nextInt(11)*level;
+			damage = 5 + r.nextInt(11)*level;
 		}
 		else if(name.equalsIgnoreCase("three slimes"))
 		{
@@ -45,12 +46,12 @@ public class Enemy extends Character
 		else if(name.equalsIgnoreCase("giant bat"))
 		{
 			health = 200 + r.nextInt(21)*level;
-			damage = 10 + r.nextInt(11)*level;
+			damage = 15 + r.nextInt(11)*level;
 		}
 		else if(name.equalsIgnoreCase("bandit"))
 		{
 			health = 200 + r.nextInt(21)*level;
-			damage = 10 + r.nextInt(11)*level;
+			damage = 8 + r.nextInt(11)*level;
 		}
 		else if(name.equalsIgnoreCase("bear"))
 		{
@@ -62,8 +63,43 @@ public class Enemy extends Character
 			health = 500 + r.nextInt(21)*level;
 			damage = 5 + r.nextInt(11)*level;
 		}
-	}
-	
+		else if(name.equalsIgnoreCase("spaghetti cult"))
+		{
+			health = 50 + r.nextInt(21)*level;
+			damage = 20 + r.nextInt(11)*level;
+		}
+		else if(name.equalsIgnoreCase("commy"))
+		{
+			health = 100 + r.nextInt(21)*level;
+			damage = 5 + r.nextInt(11)*level;
+		}
+		else if(name.equalsIgnoreCase("skelly"))
+		{
+			health = 20 + r.nextInt(21)*level;
+			damage = 2 + r.nextInt(11)*level;
+		}
+		else if(name.equalsIgnoreCase("poke"))
+		{
+			health = 50 + r.nextInt(21)*level;
+			damage = 10 + r.nextInt(11)*level;
+		}
+		else if(name.equalsIgnoreCase("gryphon"))
+		{
+			health = 100 + r.nextInt(21)*level;
+			damage = 17 + r.nextInt(11)*level;
+		}
+		else if(name.equalsIgnoreCase("gryphon"))
+		{
+			health = 100 + r.nextInt(21)*level;
+			damage = 17 + r.nextInt(11)*level;
+		}
+		else if(name.equalsIgnoreCase("button"))
+		{
+			health = 1 + r.nextInt(21)*level;
+			damage = 1 + r.nextInt(11)*level;
+		}
+}
+		
 	public int getHealth()
 	{
 		return health;
@@ -92,9 +128,10 @@ public class Enemy extends Character
 	{
 		this.level = level;
 	}
+	// pulls an event/enemy from the array
 	public String getEnemy()
 	{
-		return names[r.nextInt(6)];
+		return names[r.nextInt(13)];
 	}
 
 	@Override
@@ -138,13 +175,33 @@ public class Enemy extends Character
 		{
 			return orangemanEvent(user, userInput);
 		}
+		else if(name.equalsIgnoreCase("spaghetti cult"))
+		{
+			return spaghettiEvent(user, userInput);
+		}
+		else if(name.equalsIgnoreCase("commy"))
+		{
+			return communistEvent(user, userInput);
+		}
+		else if(name.equalsIgnoreCase("skelly"))
+		{
+			return skeletonEvent(user, userInput);
+		}
+		else if(name.equalsIgnoreCase("poke"))
+		{
+			return pokemonEvent(user, userInput);
+		}
+		else if(name.equalsIgnoreCase("gryphon"))
+		{
+			return gryphonEvent(user, userInput);
+		}
 		else
 		{
 			return true;
 		}
 		
 	}
-
+	// starter event
 	private boolean slimeEvent(Character user, Scanner userInput) 
 	{
 		System.out.println("Slime: \"You are disgusting\"\n");
@@ -165,7 +222,7 @@ public class Enemy extends Character
 		}
 		while(!(choice.equals("1")||choice.equals("2")));
 	}
-	
+	// follow up to starter
 	private boolean slime3Event(Character user, Scanner userInput) 
 	{
 		System.out.println("Slimes: \"Hey hey hey look Who's here. Aren't you the " + user.getName() +" that killed our brother?\"\n");
@@ -195,9 +252,10 @@ public class Enemy extends Character
 		}
 		while(!(choice.equals("1")||choice.equals("2")||choice.equals("3")));
 	}
-	
+	// a group of bats
 	private boolean batsEvent(Character user, Scanner userInput) 
 	{
+		System.out.println("As you walk along the path, a swarm of bats approaches you");
 		System.out.println("Bats: \"You looks delicious. Can we take a bite of you?\"\n");
 		String choice;
 		do
@@ -213,7 +271,7 @@ public class Enemy extends Character
 			}
 			else if (choice.equals("2"))
 			{
-				System.out.println("(you offer your arm to the swarm of bats");
+				System.out.println("(You offer your arm to the swarm of bats");
 				System.out.println("Bats: \"You are so kind!\"");
 				setHealth(-(r.nextInt(100)));
 				setDamage(damage-(level + r.nextInt(4)));
@@ -222,24 +280,24 @@ public class Enemy extends Character
 			}
 			else
 			{
-				System.out.println("Bat 1: \"He's so kind!\"");
+				System.out.println("Bat 1: \"Your so kind!\"");
 				System.out.println("Bat 2: \"I know right?\"");
-				System.out.println("(The bats fly away)");
+				System.out.println("(The bats fly away)\n");
 				return false;
 			}
 		}
 		while(!(choice.equals("1")||choice.equals("2")||choice.equals("3")));
 	}
-	
+	// a bat king enemy
 	private boolean batEvent(Character user, Scanner userInput) 
 	{
-		System.out.println("Bat: \"I am the king of this reign. You come here and let me take a bite of you\"\n");
+		System.out.println("Bat: \"I am the bat king of this realm. I command you to come here and let me take a bite of you\"\n");
 		String choice;
 		do
 		{
-			System.out.println("1. \"I want to take a bit of you\"");
+			System.out.println("1. \"I want to take a bite of you\"");
 			System.out.println("2. \"Yes sir\"");
-			System.out.println("3. (You found yourself stepping on poop poop)");
+			System.out.println("3. (Find a way to quickly get out of the situation)");
 			choice = userInput.nextLine();
 			if (choice.equals("1"))
 			{
@@ -251,7 +309,9 @@ public class Enemy extends Character
 				System.out.println("Bats: \"That's Right!\"");
 				user.setHealth(user.getHealth()/2);
 				user.setDamage(user.getDamage()*2);
-				System.out.println("(You have lost HP and gain damage significantly)\n");
+				user.getHealth();
+				user.getDamage();
+				System.out.println("(You have lost some HP and but gained twice the amount of damage!)\n");
 				return true;
 			}
 			else
@@ -263,16 +323,16 @@ public class Enemy extends Character
 		}
 		while(!(choice.equals("1")||choice.equals("2")||choice.equals("3")));
 	}
-	
+	// robs the player or attacks
 	private boolean banditEvent(Character user, Scanner userInput) 
 	{
-		System.out.println("Bandit: \"Yo man. Give me your underwear or I kill you\"\n");
+		System.out.println("Bandit: \"Hey you. Give me your pants or else\"\n");
 		String choice;
 		do
 		{
 			System.out.println("1. \"No way man I lost my pants already\"");
-			System.out.println("2. \"Why would you want my underwear?\"");
-			System.out.println("3. (You give your underwear to the bandit)");
+			System.out.println("2. \"Why would you want my pants?\"");
+			System.out.println("3. (Give your pants to the bandit)");
 			choice = userInput.nextLine();
 			if (choice.equals("1"))
 			{
@@ -287,9 +347,9 @@ public class Enemy extends Character
 			}
 			else
 			{
-				System.out.println("(Fortunely you got another underwear)");
+				System.out.println("(Thankfully you always have a spare pair of pants)");
 				System.out.println("Bandit: \"Thank you!\"");
-				System.out.println("(Enemies Bandit walk away with a sated look)\n");
+				System.out.println("(The bandit walk away with a sated look)\n");
 				return false;
 			}
 		}
@@ -313,7 +373,7 @@ public class Enemy extends Character
 			}
 			else if (choice.equals("2"))
 			{
-				System.out.println("Bear: \"bear?be bear bearrrr a bearber~\"");
+				System.out.println("Bear: \"bear?be bear bearrrr a bearber\"");
 				System.out.println("Bear's friend Tarzan: \"She said she want to you guess a number\""); 
 				int answer = r.nextInt(101);
 				int guess;
@@ -348,11 +408,11 @@ public class Enemy extends Character
 	}
 	//not trump
 	private boolean orangemanEvent(Character user, Scanner userInput) {
-		System.out.println("As you step through the forest you hear a bigly and very strong voice behind the nearby trees");
+		System.out.println("As you step through a forest you hear a bigly and very strong voice behind the nearby trees");
 		System.out.println("Orange Man: We need to build a wall and it has to built quickly and I don't mind having \n"
-						+ "a big beutiful door in that wall so people can come in legally");
-		System.out.println("But some of them are not good people, they are bringing in drugs, they're bringing drugs, \n" 
-				+ "they're bringing crime and some, I assume, are good people.\" ");
+						+ "a big beutiful door in that wall so people can come in legally" + " But some of them are not good people,\n"
+						+ "they are bringing in drugs, they're bringing drugs, " + "they're bringing crime and some, I assume, are\n"
+						+ "good people.\" ");
 		String choice;
 		do
 		{
@@ -383,34 +443,220 @@ public class Enemy extends Character
 		}
 		while(!(choice.equals("1")||choice.equals("2")||choice.equals("3")));
 	}
-	/*
 	//non combat even designed to lower/improve stats
 	private boolean spaghettiEvent(Character user, Scanner userInput) {
-		
+		System.out.println("As you travel through a valley you come across a group of hooded figures gathering around");
+		System.out.println("what appears to be a flying spaghetti monster");
+		System.out.println("Hooded Figure: \"In the Name of the Pasta, and of the Sauce, and of the Holy Meatballs ");
+		System.out.println("Accept His Noodly Magnificence into your heart, into your soul, and ye shall forever be free. R'Amen\"\n");
+		System.out.println("The group has still not noticed you. Do you...\n");
+		String choice;
+		do
+		{
+			System.out.println("1. Ambush the holy ritual");
+			System.out.println("2. Wait things out");
+			System.out.println("3. Join the worship");
+			choice = userInput.nextLine();
+			if (choice.equals("1"))
+			{
+				System.out.println("Spaghetti cult: May his noodly appendage protect us!");
+				return true;
+			}
+			else if (choice.equals("2"))
+			{
+				System.out.println("\"Our saucer which art in a colander, draining be Your noodles. Thy noodle come, \n"
+						+ "Thy meatballness be done on earth, as it is meaty in heaven. Give us this day our daily sauce, \n"
+						+ "and forgive us our lack of piracy, as we pirate and smuggle against those who lack piracy with us. \n"
+						+ "And lead us not into vegetarianism,but deliver us from non-red meat sauce. For thine is the colander, \n"
+						+ "the noodle, and the sauce, forever and ever. R'Amen. ");
+				System.out.println("The flyinging spaghetti and its worshippers suddenly dissappear in a flash of light.\n"); 
+				return false;
+			}
+			else
+			{
+				System.out.println("As you walk torwards the group they take notice of you immediately.");
+				System.out.print("Hooded Figure: \"Welcome\"");
+				user.getName();
+				System.out.println("You feel at ease as the worship continues and feel oddly enough, slightly stronger");
+				user.setHealth(user.getHealth()+40);
+				user.setDamage(user.getDamage()+6);
+				System.out.println("Health: " + user.getHealth());
+				System.out.println("DMG: " + user.getDamage());
+				return false;
+			}
+		}
+		while(!(choice.equals("1")||choice.equals("2")||choice.equals("3")));
 	}
 	// russian/chinese dude that you can fight
 	private boolean communistEvent(Character user, Scanner userInput) {
-		
-	}
-	// non combat event based on chance
-	private boolean houseEvent(Character user, Scanner userInput) {
-		
+		System.out.println("You come across what appears to be a bearded man wearing a ushanka and fur coat.");
+		System.out.println("He quickly takes notice of you and begins to speak.");
+		System.out.println("Bearded Man: \"Greetings comrade, do you need any help? I know you have lost something.\"\n");
+		String choice;
+		do
+		{
+			System.out.println("1. Attack the commy");
+			System.out.println("2. Accept his help");
+			System.out.println("3. Run away before he does something");
+			choice = userInput.nextLine();
+			if (choice.equals("1"))
+			{
+				System.out.println("The bearded man readies his fist.\n");
+				return true;
+			}
+			else if (choice.equals("2"))
+			{
+				System.out.println("Take this friend you will need it.");
+				System.out.println("Item get: Ushanka");
+				user.setHealth(user.getHealth()+5);
+				user.setDamage(user.getDamage()+2);
+				System.out.println("Health: " + user.getHealth());
+				System.out.println("DMG: " + user.getDamage());
+				System.out.println("You are now a Communist! Congrats!\n");
+				return false;
+			}
+			else
+			{
+				System.out.println("Nothing good ever comes out of negotiating with the red terror. Good call.\n");
+				return false;
+			}
+		}
+		while(!(choice.equals("1")||choice.equals("2")||choice.equals("3")));
 	}
 	// generic enemy
 	private boolean skeletonEvent(Character user, Scanner userInput) {
-		
+		System.out.println("Oh wonderful a skeleton. You know what this means.");
+		String choice;
+		do
+		{
+			System.out.println("1. Attack the skeleton");
+			System.out.println("2. Steal its bones");
+			System.out.println("3. Run away before it notices you");
+			choice = userInput.nextLine();
+			if (choice.equals("1"))
+			{
+				System.out.println("The skeleton raises its sword and begins to run torwards you");
+				return true;
+			}
+			else if (choice.equals("2"))
+			{
+				System.out.println("(You use your agility to take the skeletons legs)");
+				System.out.println("Really, you took the legs?");
+				System.out.println("Item get: Skeleton legs");
+				user.setDamage(user.getDamage()+5);
+				System.out.println("DMG: " + user.getDamage());
+				System.out.println("You now do additional damage by somehow fusing your weapon with bones!\n");
+				return false;
+			}
+			else
+			{
+				System.out.println("Wow you ran away from a skeleton?");
+				return false;
+			}
+		}
+		while(!(choice.equals("1")||choice.equals("2")||choice.equals("3")));
 	}
 	// a pokemon event that may increase dmg
 	private boolean pokemonEvent(Character user, Scanner userInput) {
-		
+		System.out.println("Hey look, theres a pokeball but its slightly cracked. Would you like to pick it up?");
+		String choice;
+		do
+		{
+			System.out.println("1. Pick up the pokeball");
+			System.out.println("2. Break the ball");
+			System.out.println("3. Don't do it");
+			choice = userInput.nextLine();
+			if (choice.equals("1"))
+			{
+				double randomizer = Math.random()*10;
+				if(randomizer<5) {
+					System.out.println("The ball opens and a Magikarp suddenly appears!");
+					System.out.println("Unfortunately its absolutely useless!\n");
+					return false;
+				} else {
+					System.out.println("The ball opens and a Pikachu suddenly appears!\n");
+					user.setDamage(user.getDamage()+10);
+					System.out.println("DMG: " + user.getDamage());
+					return false;
+				}
+			}
+			if (choice.equals("2")) {
+				System.out.println("The ball opens and a very angry Charizard attacks!");
+				return true;
+			}
+			else
+			{
+				System.out.println("Best to stay away from unsafe balls\n");
+				return false;
+			}
+		}
+		while(!(choice.equals("1")||choice.equals("2")));
 	}
 	// generic enemy
 	private boolean gryphonEvent(Character user, Scanner userInput) {
-		
+		System.out.println("As you stroll along the road a very angry gryphon charges at you");
+		System.out.println("It doesn't look like it wants to talk either");
+		String choice;
+		do
+		{
+			System.out.println("1. Attack the angry bird");
+			System.out.println("2. Run away and hope that your athletic enough");
+			choice = userInput.nextLine();
+			if (choice.equals("1"))
+			{
+				System.out.println("The Gryphon roars.\n");
+				return true;
+			}
+			else
+			{
+				System.out.println("The Gryphon roars.\n");
+				return true;
+			}
+		}
+		while(!(choice.equals("1")||choice.equals("2")));
 	}
 	// chance event
 	private boolean buttonEvent(Character user, Scanner userInput) {
-		
+		System.out.println("Hey a button! Want to press it?");
+		String choice;
+		do
+		{
+			System.out.println("1. Press the button");
+			System.out.println("2. Fight the button");
+			System.out.println("3. NOPE");
+			choice = userInput.nextLine();
+			if (choice.equals("1"))
+			{
+				double randomizer = Math.random()*10;
+				if(randomizer<5) {
+					System.out.println("A super star drops on your head.");
+					System.out.println("You feel slightly stronger.\n");
+					user.setHealth(user.getHealth()+100);
+					user.setDamage(user.getDamage()+50);
+					System.out.println("Health: " + user.getHealth());
+					System.out.println("DMG: " + user.getDamage());
+					return false;
+				} else {
+					System.out.println("The button explodes!\n");
+					user.setHealth(user.getHealth()-30);
+					System.out.println("Health: " + user.getHealth() + "-30");
+					return false;
+				}
+			} else if (choice.equals("2")) {
+				System.out.println("A button.");
+				return true;
+			}
+			else
+			{
+				System.out.println("Nothing good ever comes out of pressing random buttons. Good call.\n");
+				return false;
+			}
+		}
+		while(!(choice.equals("1")||choice.equals("2")||choice.equals("3")));
+	}
+	/* WIP
+		// non combat event based on chance
+	private boolean houseEvent(Character user, Scanner userInput) {
 	}
 	*/
 }
