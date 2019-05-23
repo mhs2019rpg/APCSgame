@@ -7,18 +7,12 @@ import java.util.Scanner;
 
 public class Enemy extends Character
 {
-	// event after enemy
-	// some options 
-	// checks strength or intelligence
-	// if true option occurs and you gain/lose something add health or damage higher/lower
-	//otherwise text saying nothing happens
-	// when you hit 1 and enter to continue
-	//enemy repeat
 	private int health;
 	private int damage;
 	private int level;
 	
 	private String name;
+	// an array of events
 	private String[] names = {"slime", "three slimes", "swarm of bats", "giant bat", "bandit", "bear", "trump", "spaghetti cult", "commy",
 							  "skelly", "poke", "gryphon", "button"}; 
 	
