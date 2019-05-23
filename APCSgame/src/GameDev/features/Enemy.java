@@ -195,6 +195,10 @@ public class Enemy extends Character
 		{
 			return gryphonEvent(user, userInput);
 		}
+		else if(name.equalsIgnoreCase("button"))
+		{
+			return buttonEvent(user, userInput);
+		}
 		else
 		{
 			return true;
