@@ -179,7 +179,8 @@ public class Game {
 		if (enemy.triggerBattle(user, userInput)) {
 			battle(userInput);
 		} else {
-			Game newGame = new Game(user, enemy);
+			Enemy foe = new Enemy(enemy.getEnemy(), user.getLevel());
+			Game newGame = new Game(user, foe);
 			newGame.startEvent(userInput);
 		}
 	}

@@ -472,7 +472,7 @@ public class Enemy extends Character
 						+ "Thy meatballness be done on earth, as it is meaty in heaven. Give us this day our daily sauce, \n"
 						+ "and forgive us our lack of piracy, as we pirate and smuggle against those who lack piracy with us. \n"
 						+ "And lead us not into vegetarianism,but deliver us from non-red meat sauce. For thine is the colander, \n"
-						+ "the noodle, and the sauce, forever and ever. R'Amen. ");
+						+ "the noodle, and the sauce, forever and ever. R'Amen.\n");
 				System.out.println("The flyinging spaghetti and its worshippers suddenly dissappear in a flash of light.\n"); 
 				return false;
 			}
@@ -484,8 +484,8 @@ public class Enemy extends Character
 				System.out.println("You feel at ease as the worship continues and feel oddly enough, slightly stronger");
 				user.setHealth(user.getHealth()+40);
 				user.setDamage(user.getDamage()+6);
-				System.out.println("Health: " + user.getHealth());
-				System.out.println("DMG: " + user.getDamage());
+				System.out.println("Health: " + "40");
+				System.out.println("DMG: " + "6");
 				return false;
 			}
 		}
@@ -548,6 +548,7 @@ public class Enemy extends Character
 				System.out.println("Really, you took the legs?");
 				System.out.println("Item get: Skeleton legs");
 				user.setDamage(user.getDamage()+5);
+				System.out.println("DMG: + 5");
 				System.out.println("DMG: " + user.getDamage());
 				System.out.println("You now do additional damage by somehow fusing your weapon with bones!\n");
 				return false;
@@ -580,6 +581,7 @@ public class Enemy extends Character
 				} else {
 					System.out.println("The ball opens and a Pikachu suddenly appears!\n");
 					user.setDamage(user.getDamage()+10);
+					System.out.println("DMG: +10");
 					System.out.println("DMG: " + user.getDamage());
 					return false;
 				}
@@ -637,13 +639,16 @@ public class Enemy extends Character
 					System.out.println("You feel slightly stronger.\n");
 					user.setHealth(user.getHealth()+100);
 					user.setDamage(user.getDamage()+50);
+					System.out.println("DMG: +100");
+					System.out.println("Health: +50");
 					System.out.println("Health: " + user.getHealth());
 					System.out.println("DMG: " + user.getDamage());
 					return false;
 				} else {
 					System.out.println("The button explodes!\n");
 					user.setHealth(user.getHealth()-30);
-					System.out.println("Health: " + user.getHealth() + "-30");
+					System.out.println("Health: -30");
+					System.out.println("Health: " + user.getHealth());
 					return false;
 				}
 			} else if (choice.equals("2")) {
